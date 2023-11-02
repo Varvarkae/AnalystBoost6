@@ -1,0 +1,38 @@
+@startuml
+!theme mars
+autonumber
+hide footbox
+skinparam {
+Maxmessagesize 150
+ParticipantPadding 30
+Roundcorner 15
+DatabaseBackgroundColor Wheat
+}
+
+header REPAIR 9 ¾
+title UC-03 Отправить результат работ \n
+footer \n\n | tg @AmperYev |       Konovalov Andrey, 2023
+
+
+box Actor #LightYellow
+Actor "Исполнитель" as user order 10 
+end box
+box Client #LightBlue
+Participant "Клиент" as client order 20
+end box
+box Server #LightGreen 
+Participant "Сервер" as server order 30
+Database "БД" as db order 40
+end box
+
+user -> client: Отправить результат работ
+client -> client: Отобразить форму для заполнения
+user -> client: Заполнить форму
+client -> client: Сохранить в кэш
+client -> server: Передать данные
+server -> db: Сохранить данные
+db --> server: Подтвердить сохранение
+server --> client: Подтвердить сохранение
+client -> client: Отобразить, что результат работ сохранен
+
+@enduml
