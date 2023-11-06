@@ -3,16 +3,15 @@
 autonumber
 hide footbox
 skinparam {
-Maxmessagesize 150
+Maxmessagesize 155
+Roundcorner 17
 ParticipantPadding 30
-Roundcorner 15
 DatabaseBackgroundColor Wheat
 }
 
 header REPAIR 9 ¾
 title UC-03 Отправить результат работ \n
 footer \n\n | tg @AmperYev |       Konovalov Andrey, 2023
-
 
 box Actor #LightYellow
 Actor "Исполнитель" as user order 10 
@@ -34,5 +33,4 @@ server -> db: Сохранить данные
 db --> server: Подтвердить сохранение
 server --> client: Подтвердить сохранение
 client -> client: Отобразить, что результат работ сохранен
-
 @enduml
