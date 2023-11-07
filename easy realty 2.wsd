@@ -1,0 +1,45 @@
+@startuml
+autonumber
+hide footbox
+skinparam Maxmessagesize 150
+skinparam sequence {
+MessageAlign center
+ParticipantPadding 40
+DatabaseBackgroundColor Wheat
+}
+
+
+header Easy Realty
+title Скачать договор ДДУ
+
+
+box User #LightSteelBlue
+Actor "User" as u order 10 
+end box
+box Client #LightSlateGray
+Participant "Client" as c order 20
+end box
+box Server #LightSeaGreen
+Participant "Server" as s order 30
+end box
+box Database #LightGrey
+database "DB" as dab order 40 
+end box
+
+u -> c: Забронировать квартиру
+c -> c: Отобразить список проектов 
+u -> c: Выбрать проект
+c -> s: Запросить данные по выбранному проекту
+s -> c: Отобразить данные про проекту
+u -> c: Открыть функцию "Фильтры"
+c -> c: Отобразить функцию "Фильтры"
+u -> c: Вводит фильтры
+c -> dab: Запросить выгрузку доступных квартир
+dab -> c: Отобразить список доступных квартир
+u -> c: Забронировать квартиру из списка
+c -> c: Отобразить. что квартира успешно забронирована
+c -> dab: Передать данные о том, что квартира забронирована
+dab -> dab: Поставить квартиру в статус "Забронирована"
+s -> c: Отобразить в личном кабинете пользователя забронированную квартиру
+
+@enduml
