@@ -1,0 +1,36 @@
+@startuml
+autonumber
+hide footbox
+skinparam Maxmessagesize 150
+skinparam sequence{
+ParticipantPadding 40
+DatabaseBackgroundColor Wheat
+MessageAlign center
+}
+
+header Easy Realty
+title Скачать договор ДДУ
+
+
+box User #LightGoldenRodYellow
+Actor "User" as u order 10 
+end box
+box Client #LightSteelBlue
+Participant "Client" as c order 20
+end box
+box Server #LightSkyBlue
+Participant "Server" as s order 30
+end box
+box Database #LightGrey
+Database "DB" as dab order 40
+end box
+u -> c: Открыть "Мои документы"
+c -> c: Отобразить список доступных для скачивания документов
+u -> c: Скачать "договор ДДУ"
+c -> s: Передать запрос на скачивание файла "договор ДДУ"
+s -> dab: Запросить файл "договор ДДУ"
+dab --> s: Отправить файл "договор ДДУ"
+s --> c: Отобразить пользователю "договор ДДУ" и кнопку скачать
+u -> c: Скачать "договор ДДУ"
+
+@enduml
