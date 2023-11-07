@@ -1,0 +1,55 @@
+@startuml
+!theme mars
+autonumber
+skinparam backgroundColor #EEEBDC
+
+skinparam {
+Maxmessagesize 170
+Roundcorner 17
+ParticipantPadding 30
+BoxPadding 10
+DatabaseBackgroundColor Wheat
+ActorFontSize 15
+}
+
+header REPAIR 9 ¾
+title UC-01 Передать заявку Исполнителю \n
+footer \n\n | tg @AmperYev |       Konovalov Andrey, 2023
+
+box #Magenta
+Actor "Диспетчер" as brain order 10 
+end box
+box #LightBlue
+Participant "Клиент" as client order 20
+end box
+box #LightGreen 
+Participant "Сервер" as server order 30
+Database "БД" as db order 35
+end box
+box #Grey
+Actor "Исполнитель" as user order 40 
+end box
+box #LightYellow
+Participant "Внешняя ИС" as customerIS order 50
+end box
+server -> customerIS: Перечень новых заявок
+customerIS --> server: Перечень новых заявок
+server -> db: Сохранить перечень новых заявок
+brain -> client: Отобразить новые заявки
+client -> server: Отобразить новые заявки
+server -> db: Отобразить новые заявки
+db --> server: Перечень новых заявок
+server --> client: Перечень новых заявок
+brain -> client: Выбрать заявку
+client -> server: Запросить данные по предыстории ремонтов
+server -> db: Запросить данные по предыстории ремонтов
+db --> server: Предыстория ремонтов
+server --> client: Предыстория ремонтов
+client -> client: Предоставить для выбора Исполнителей согласно логике
+brain -> client: Выбрать исполнителя
+client -> user: Передать заявку
+user --> client: Подтвердить получение заяки
+client -> client: Отобразить подтверждение получения заявки
+client -> server: Сохранить информацию о переданной заявке
+
+@enduml
