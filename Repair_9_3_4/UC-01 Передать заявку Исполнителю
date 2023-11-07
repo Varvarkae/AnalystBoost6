@@ -34,19 +34,23 @@ box #Magenta
 Actor "Исполнитель" as user order 50
 end box
 
-server -> customerIS: Перечень новых заявок
-customerIS --> server: Перечень новых заявок
-server -> db: Сохранить перечень новых заявок
-brain -> client: Отобразить новые заявки
-client -> server: Отобразить новые заявки
-server -> db: Отобразить новые заявки
-db --> server: Перечень новых заявок
-server --> client: Перечень новых заявок
+!$pnz = "перечень новых заявок"
+!$dpr = "данные по предыстории ремонтов"
+
+server -> customerIS: Запросить $pnz
+customerIS --> server: Запросить $pnz
+server -> db: Сохранить $pnz
+brain -> client: Отобразить $pnz
+client -> server: Отобразить $pnz
+server -> db: Отобразить $pnz
+db --> server: Передать $pnz
+server --> client: Передать $pnz
 brain -> client: Выбрать заявку
-client -> server: Запросить данные по предыстории ремонтов
-server -> db: Запросить данные по предыстории ремонтов
-db --> server: Предыстория ремонтов
-server --> client: Предыстория ремонтов
+client -> client: Отобразить, что запрос в обработке
+client -> server: Запросить $dpr
+server -> db: Запросить $dpr
+db --> server: Отправить $dpr
+server --> client: Отправить $dpr
 client -> client: Предоставить для выбора Исполнителей согласно логике
 brain -> client: Выбрать исполнителя
 client -> user: Передать заявку
