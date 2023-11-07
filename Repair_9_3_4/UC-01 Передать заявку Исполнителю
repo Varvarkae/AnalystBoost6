@@ -7,6 +7,7 @@ skinparam {
 Maxmessagesize 170
 Roundcorner 17
 ParticipantPadding 30
+ParticipantFontSize 18
 BoxPadding 10
 DatabaseBackgroundColor Wheat
 ActorFontSize 15
@@ -16,7 +17,7 @@ header REPAIR 9 ¾
 title UC-01 Передать заявку Исполнителю \n
 footer \n\n | tg @AmperYev |       Konovalov Andrey, 2023
 
-box #Magenta
+box #Pink
 Actor "Диспетчер" as brain order 10 
 end box
 box #LightBlue
@@ -26,12 +27,13 @@ box #LightGreen
 Participant "Сервер" as server order 30
 Database "БД" as db order 35
 end box
-box #Grey
-Actor "Исполнитель" as user order 40 
-end box
 box #LightYellow
-Participant "Внешняя ИС" as customerIS order 50
+Participant "Внешняя ИС" as customerIS order 40
 end box
+box #Magenta
+Actor "Исполнитель" as user order 50
+end box
+
 server -> customerIS: Перечень новых заявок
 customerIS --> server: Перечень новых заявок
 server -> db: Сохранить перечень новых заявок
