@@ -31,20 +31,19 @@ box #LightYellow
 Participant "Внешняя ИС" as customerIS order 40
 end box
 box #Magenta
-Actor "Исполнитель" as user order 50
-end box
 
 !$pnz = "перечень новых заявок"
 !$dpr = "данные по предыстории ремонтов"
 
-server -> customerIS: Запросить $pnz
-customerIS --> server: Запросить $pnz
+server -> customerIS: Опросить систему, чтобы получить $pnz
+customerIS --> server: Передать $pnz
 server -> db: Сохранить $pnz
-brain -> client: Отобразить $pnz
-client -> server: Отобразить $pnz
-server -> db: Отобразить $pnz
+brain -> client: Открыть $pnz
+client -> server: Запросить $pnz
+server -> db: Запросить $pnz
 db --> server: Передать $pnz
 server --> client: Передать $pnz
+client -> client: Отображает $pnz
 brain -> client: Выбрать заявку
 client -> client: Отобразить, что запрос в обработке
 client -> server: Запросить $dpr
@@ -53,9 +52,9 @@ db --> server: Отправить $dpr
 server --> client: Отправить $dpr
 client -> client: Предоставить для выбора Исполнителей согласно логике
 brain -> client: Выбрать исполнителя
-client -> user: Передать заявку
-user --> client: Подтвердить получение заяки
+client -> server: Передать заявку Исполнителю
+server --> client: Подтвердить получение заявки Исполнителем
 client -> client: Отобразить подтверждение получения заявки
-client -> server: Сохранить информацию о переданной заявке
+server -> db: Установить для переданной заявки статус "Рабочее"
 
 @enduml
