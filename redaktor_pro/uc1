@@ -1,0 +1,42 @@
+@startuml slide_skinparam
+skinparam {
+ Maxmessagesize 100 }
+skinparam sequence {
+ ParticipantPadding 30
+ MessageAlign center }
+autonumber
+title UC-1 Создание нового проекта
+
+!$msg_1 = "Создать новый проект"
+!$msg_2 = "Данные для формы создания проекта"
+!$msg_3 = "ID проекта"
+
+box Public #Linen
+actor Редактор as ac order 10
+end box
+
+box Web App #LightYellow
+participant "Web приложение" as app order 15
+end box
+
+box Редактор Про #HoneyDew
+participant "API шлюз" as api order 20
+participant "Оркестратор" as orc order 30
+
+participant "Управление проектами" as pm order 40
+
+
+database "База данных" as db order 50
+end box
+ac -> app: $msg_1
+app -> api: $msg_1
+api -> orc: $msg_1
+orc -> pm: $msg_1
+pm -> db: Запросить $msg_2
+db -> pm: $msg_2
+pm -> orc: $msg_2, $msg_3
+orc -> api: $msg_2, $msg_3
+api -> app: $msg_2, $msg_3
+app -> ac: $msg_2, $msg_3  
+
+@enduml
