@@ -1,0 +1,22 @@
+@startuml
+!theme mars
+skinparam backgroundColor #FFFBDC
+
+header REPAIR 9 ¾
+title Activity diagram \n
+footer \n\n | tg @AmperYev |       Konovalov Andrey, 2023
+
+start
+repeat :Передать\nзаявку;
+if (Принята\nИсполнителем?) then (Да)
+:Выполнить ;
+:Отправить\nрезультат ;
+stop
+endif
+-> Нет;
+:Выбрать другого\nИсполнителя;
+repeat while (Третья попытка\nпередачи) is (Нет) not (Да)
+:Сообщить\nруководителю;
+end
+
+@enduml
