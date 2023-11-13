@@ -1,5 +1,5 @@
 @startuml
-!theme mars
+
 skinparam backgroundColor #FFFBDC
 
 header REPAIR 9 ¾
