@@ -24,7 +24,8 @@ box #LightBlue
 Participant "Клиент" as client order 20
 end box
 box #LightGreen 
-Participant "Сервер" as server order 30
+Participant "User service" as usser order 30
+Participant "Адаптер ИС" as adapter order 34
 Database "БД" as db order 35
 end box
 box #LightYellow
@@ -35,26 +36,28 @@ box #Magenta
 !$pnz = "перечень новых заявок"
 !$dpr = "данные по предыстории ремонтов"
 
-server -> customerIS: Опросить систему, чтобы получить $pnz
-customerIS --> server: Передать $pnz
-server -> db: Сохранить $pnz
+usser -> adapter: Опросить систему, чтобы получить $pnz
+adapter -> customerIS: Получить $pnz
+customerIS --> adapter: Передать $pnz
+adapter --> usser: Передать $pnz
+usser -> db: Сохранить $pnz
 brain -> client: Открыть $pnz
-client -> server: Запросить $pnz
-server -> db: Запросить $pnz
-db --> server: Передать $pnz
-server --> client: Передать $pnz
+client -> usser: Запросить $pnz
+usser -> db: Запросить $pnz
+db --> usser: Передать $pnz
+usser --> client: Передать $pnz
 client -> client: Отображает $pnz
 brain -> client: Выбрать заявку
 client -> client: Отобразить, что запрос в обработке
-client -> server: Запросить $dpr
-server -> db: Запросить $dpr
-db --> server: Отправить $dpr
-server --> client: Отправить $dpr
+client -> usser: Запросить $dpr
+usser -> db: Запросить $dpr
+db --> usser: Отправить $dpr
+usser --> client: Отправить $dpr
 client -> client: Предоставить для выбора Исполнителей согласно логике
 brain -> client: Выбрать исполнителя
-client -> server: Передать заявку Исполнителю
-server --> client: Подтвердить получение заявки Исполнителем
+client -> usser: Передать заявку Исполнителю
+usser --> client: Подтвердить получение заявки Исполнителем
 client -> client: Отобразить подтверждение получения заявки
-server -> db: Установить для переданной заявки статус "Рабочее"
+usser -> db: Установить для переданной заявки статус "Рабочее"
 
 @enduml
