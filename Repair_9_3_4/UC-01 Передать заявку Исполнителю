@@ -36,11 +36,13 @@ box #Magenta
 !$pnz = "перечень новых заявок"
 !$dpr = "данные по предыстории ремонтов"
 
+==Синхронизация с Внешней Информационной системой==
 usser -> adapter: Опросить систему, чтобы получить $pnz
-adapter -> customerIS: Получить $pnz
+adapter -> customerIS: Запросить $pnz
 customerIS --> adapter: Передать $pnz
 adapter --> usser: Передать $pnz
 usser -> db: Сохранить $pnz
+==Проверка новых заявок и перадача Исполнителям==
 brain -> client: Открыть $pnz
 client -> usser: Запросить $pnz
 usser -> db: Запросить $pnz
